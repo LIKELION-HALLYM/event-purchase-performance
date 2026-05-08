@@ -9,39 +9,39 @@ const ROOT = path.join(__dirname, "\uac15\ubbfc", "mypage");
 const initialData = {
   profile: {
     id: 1,
-    name: "Kang Min",
+    name: "강민",
     email: "kkm@example.com",
     phone: "010-1234-5678",
-    address: "Hallym University, Chuncheon"
+    address: "강원특별자치도 춘천시 한림대학길 1"
   },
   orders: [
     {
       orderId: "ORD-20260505-001",
       orderedAt: "2026-05-05",
-      status: "Preparing shipment",
+      status: "배송 준비",
       totalAmount: 128000,
       items: [
-        { productId: "P-1001", productName: "Oversized Check Shirt", quantity: 1, price: 48900 },
-        { productId: "P-1002", productName: "Wide Denim Pants", quantity: 1, price: 79100 }
+        { productId: "P-1001", productName: "오버핏 체크 셔츠", quantity: 1, price: 48900 },
+        { productId: "P-1002", productName: "와이드 데님 팬츠", quantity: 1, price: 79100 }
       ]
     },
     {
       orderId: "ORD-20260429-014",
       orderedAt: "2026-04-29",
-      status: "Delivered",
+      status: "배송 완료",
       totalAmount: 73500,
       items: [
-        { productId: "P-1003", productName: "Minimal Round Cardigan", quantity: 1, price: 37950 },
-        { productId: "P-1004", productName: "Basic Logo T-Shirt", quantity: 1, price: 35550 }
+        { productId: "P-1003", productName: "미니멀 라운드 가디건", quantity: 1, price: 37950 },
+        { productId: "P-1004", productName: "베이직 로고 티셔츠", quantity: 1, price: 35550 }
       ]
     },
     {
       orderId: "ORD-20260418-006",
       orderedAt: "2026-04-18",
-      status: "Confirmed",
+      status: "구매 확정",
       totalAmount: 39000,
       items: [
-        { productId: "P-1005", productName: "Cargo Jogger Pants", quantity: 1, price: 39000 }
+        { productId: "P-1005", productName: "카고 조거 팬츠", quantity: 1, price: 39000 }
       ]
     }
   ],
@@ -51,7 +51,7 @@ const initialData = {
       orderId: "ORD-20260505-001",
       paidAt: "2026-05-05 14:28",
       status: "READY",
-      method: "Toss Payments",
+      method: "토스페이먼츠",
       amount: 128000,
       approvalNo: "-"
     },
@@ -60,7 +60,7 @@ const initialData = {
       orderId: "ORD-20260429-014",
       paidAt: "2026-04-29 19:03",
       status: "DONE",
-      method: "Toss Payments",
+      method: "토스페이먼츠",
       amount: 73500,
       approvalNo: "APRV-240429-014"
     },
@@ -69,7 +69,7 @@ const initialData = {
       orderId: "ORD-20260418-006",
       paidAt: "2026-04-18 11:42",
       status: "DONE",
-      method: "Card",
+      method: "카드",
       amount: 39000,
       approvalNo: "APRV-240418-006"
     }
@@ -80,25 +80,25 @@ const initialData = {
       brand: "NOT4NERD",
       productName: "Parachute Nylon Cargo Pants - Black",
       price: 43700,
-      category: "Pants",
+      category: "바지",
       active: true,
       imageUrl: "https://image.msscdn.net/images/goods_img/20230905/3528683/3528683_16970733118457_500.jpg"
     },
     {
       productId: "4336624",
       brand: "EXCONTAINER",
-      productName: "Minimal Button Round Crop Cardigan",
+      productName: "미니멀 버튼 라운드넥 크롭 가디건",
       price: 37950,
-      category: "Outer",
+      category: "아우터",
       active: true,
       imageUrl: "https://image.msscdn.net/images/goods_img/20240816/4336624/4336624_17706226040291_500.jpg"
     },
     {
       productId: "4306872",
       brand: "CGP",
-      productName: "90S VTG Oversized Check Shirt",
+      productName: "90S VTG 오버핏 체크셔츠",
       price: 31850,
-      category: "Top",
+      category: "상의",
       active: true,
       imageUrl: "https://image.msscdn.net/images/goods_img/20240807/4306872/4306872_17718107079304_500.jpg"
     }
@@ -107,10 +107,10 @@ const initialData = {
     {
       productId: "4936037",
       brand: "VERDNT",
-      productName: "Front Cargo Nylon Wide Pants",
+      productName: "프론트 카고 나일론 와이드 팬츠",
       price: 38600,
-      category: "Pants",
-      viewedAt: "Today 21:18",
+      category: "바지",
+      viewedAt: "오늘 21:18",
       imageUrl: "https://image.msscdn.net/images/goods_img/20250324/4936037/4936037_17688016226604_500.jpg"
     },
     {
@@ -118,8 +118,8 @@ const initialData = {
       brand: "LMC",
       productName: "OVERDYED CITIZEN STANDARD HOODIE",
       price: 76300,
-      category: "Top",
-      viewedAt: "Yesterday 18:42",
+      category: "상의",
+      viewedAt: "어제 18:42",
       imageUrl: "https://image.msscdn.net/images/goods_img/20240827/4375056/4375056_17247390508394_500.jpg"
     },
     {
@@ -127,7 +127,7 @@ const initialData = {
       brand: "EMIS",
       productName: "WIDE LOGO HAIRBAND",
       price: 39000,
-      category: "Accessory",
+      category: "소품",
       viewedAt: "05.04 12:03",
       imageUrl: "https://image.msscdn.net/images/goods_img/20250829/5378824/5378824_17564442945712_500.jpg"
     }
@@ -167,7 +167,7 @@ function readBody(req) {
 
 function requireAuth(req, res) {
   if (req.headers["x-mock-user"] !== "1") {
-    sendJson(res, 401, { message: "Login is required." });
+    sendJson(res, 401, { message: "로그인이 필요합니다." });
     return false;
   }
   return true;
@@ -180,13 +180,13 @@ function orderSummary(order) {
     status: order.status,
     totalAmount: order.totalAmount,
     itemCount: order.items.length,
-    title: `${order.items[0].productName}${order.items.length > 1 ? ` + ${order.items.length - 1} more` : ""}`
+    title: `${order.items[0].productName}${order.items.length > 1 ? ` 외 ${order.items.length - 1}개` : ""}`
   };
 }
 
 function orderActions(order) {
-  if (order.status === "Preparing shipment") return ["cancel"];
-  if (order.status === "Pending payment") return ["pay", "cancel"];
+  if (order.status === "배송 준비") return ["cancel"];
+  if (order.status === "결제 대기") return ["pay", "cancel"];
   return [];
 }
 
@@ -206,7 +206,7 @@ async function handleApi(req, res, pathname) {
 
   if (req.method === "GET" && pathname === "/api/mypage/summary") {
     const activeWishlist = db.wishlist.filter((item) => item.active);
-    const nextOrder = db.orders.find((order) => order.status !== "Confirmed");
+    const nextOrder = db.orders.find((order) => order.status !== "구매 확정");
     sendJson(res, 200, {
       profile: db.profile,
       orderCount: db.orders.length,
@@ -232,7 +232,7 @@ async function handleApi(req, res, pathname) {
     const required = ["name", "email", "phone", "address"];
     const hasInvalid = required.some((key) => typeof body[key] !== "string" || !body[key].trim());
     if (hasInvalid) {
-      sendJson(res, 400, { message: "Name, email, phone, and address are required." });
+      sendJson(res, 400, { message: "이름, 이메일, 전화번호, 기본 배송지를 모두 입력해야 합니다." });
       return;
     }
     db.profile = {
@@ -256,7 +256,7 @@ async function handleApi(req, res, pathname) {
     const orderId = decodeURIComponent(orderMatch[1]);
     const order = db.orders.find((item) => item.orderId === orderId);
     if (!order) {
-      sendJson(res, 404, { message: "Order not found." });
+      sendJson(res, 404, { message: "주문을 찾을 수 없습니다." });
       return;
     }
     sendJson(res, 200, { ...order, availableActions: orderActions(order) });
@@ -273,7 +273,7 @@ async function handleApi(req, res, pathname) {
     const paymentId = decodeURIComponent(paymentMatch[1]);
     const payment = db.payments.find((item) => item.paymentId === paymentId);
     if (!payment) {
-      sendJson(res, 404, { message: "Payment not found." });
+      sendJson(res, 404, { message: "결제 내역을 찾을 수 없습니다." });
       return;
     }
     sendJson(res, 200, payment);
@@ -290,7 +290,7 @@ async function handleApi(req, res, pathname) {
     const productId = decodeURIComponent(wishlistMatch[1]);
     const item = db.wishlist.find((product) => product.productId === productId);
     if (!item) {
-      sendJson(res, 404, { message: "Wishlist item not found." });
+      sendJson(res, 404, { message: "찜 상품을 찾을 수 없습니다." });
       return;
     }
     item.active = !item.active;
@@ -309,7 +309,7 @@ async function handleApi(req, res, pathname) {
     return;
   }
 
-  sendJson(res, 404, { message: "Unsupported mock API." });
+  sendJson(res, 404, { message: "지원하지 않는 목업 API입니다. 서버를 재시작했는지 확인하세요." });
 }
 
 function serveStatic(req, res, pathname) {
@@ -347,7 +347,7 @@ const server = http.createServer(async (req, res) => {
     }
     serveStatic(req, res, pathname);
   } catch (error) {
-    sendJson(res, 500, { message: error.message || "Mock server error." });
+    sendJson(res, 500, { message: error.message || "목업 서버 오류가 발생했습니다." });
   }
 });
 

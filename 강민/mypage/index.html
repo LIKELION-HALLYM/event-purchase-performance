@@ -3,83 +3,83 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mypage Mock</title>
+    <title>마이페이지 목업</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <main class="page">
       <header class="hero">
-        <nav class="top-nav" aria-label="service navigation">
-          <a href="#" aria-label="go home">SHOP</a>
+        <nav class="top-nav" aria-label="서비스 메뉴">
+          <a href="#" aria-label="홈으로 이동">SHOP</a>
           <div class="top-nav-actions">
-            <button class="ghost-icon" type="button" aria-label="search">S</button>
-            <button class="ghost-icon" type="button" aria-label="cart">C</button>
+            <button class="ghost-icon" type="button" aria-label="검색">⌕</button>
+            <button class="ghost-icon" type="button" aria-label="장바구니">장</button>
           </div>
         </nav>
 
         <section class="hero-card" aria-labelledby="mypage-title">
           <div class="profile-block">
-            <div class="avatar" id="avatarInitial">K</div>
+            <div class="avatar" id="avatarInitial">강</div>
             <div>
               <p class="eyebrow">MY PAGE</p>
-              <h1 id="mypage-title"><span id="heroName">Kang Min</span>'s shopping status</h1>
+              <h1 id="mypage-title"><span id="heroName">강민</span>님의 쇼핑 현황</h1>
               <p class="hero-copy" id="heroEmail">kkm@example.com</p>
             </div>
           </div>
-          <button class="solid-button" type="button" data-action="edit-profile">Edit profile</button>
+          <button class="solid-button" type="button" data-action="edit-profile">정보 수정</button>
         </section>
       </header>
 
       <p class="status-message hidden" id="statusMessage" role="status"></p>
 
-      <section class="stats" aria-label="mypage summary">
+      <section class="stats" aria-label="마이페이지 요약">
         <article class="stat-card" data-view="orders" tabindex="0" role="button">
-          <span>Orders</span>
+          <span>주문</span>
           <strong id="orderCount">0</strong>
-          <p>Last 3 months</p>
+          <p>최근 3개월</p>
         </article>
         <article class="stat-card" data-view="payments" tabindex="0" role="button">
-          <span>Payments</span>
+          <span>결제</span>
           <strong id="paymentCount">0</strong>
-          <p>Payment history</p>
+          <p>결제 내역</p>
         </article>
         <article class="stat-card" data-view="wishlist" tabindex="0" role="button">
-          <span>Wishlist</span>
+          <span>찜</span>
           <strong id="wishCount">0</strong>
-          <p>Active items</p>
+          <p>활성 찜 상품</p>
         </article>
         <article class="stat-card" data-view="recent" tabindex="0" role="button">
-          <span>Recent</span>
+          <span>최근 본 상품</span>
           <strong id="recentCount">0</strong>
-          <p>Recommendation data</p>
+          <p>추천 데이터</p>
         </article>
       </section>
 
       <div class="workbench">
-        <aside class="rail" aria-label="mypage tabs">
+        <aside class="rail" aria-label="마이페이지 탭">
           <button class="rail-item active" type="button" data-view="home">
-            <span>Home</span>
-            <small>Summary</small>
+            <span>홈</span>
+            <small>요약</small>
           </button>
           <button class="rail-item" type="button" data-view="profile">
-            <span>Profile</span>
-            <small>Edit</small>
+            <span>내 정보</span>
+            <small>수정</small>
           </button>
           <button class="rail-item" type="button" data-view="orders">
-            <span>Orders</span>
-            <small id="orderNavCount">0 orders</small>
+            <span>주문 내역</span>
+            <small id="orderNavCount">0건</small>
           </button>
           <button class="rail-item" type="button" data-view="payments">
-            <span>Payments</span>
-            <small id="paymentNavCount">0 items</small>
+            <span>결제 내역</span>
+            <small id="paymentNavCount">0건</small>
           </button>
           <button class="rail-item" type="button" data-view="wishlist">
-            <span>Wishlist</span>
-            <small id="wishNavCount">0 items</small>
+            <span>찜한 상품</span>
+            <small id="wishNavCount">0개</small>
           </button>
           <button class="rail-item" type="button" data-view="recent">
-            <span>Recent</span>
-            <small id="recentNavCount">0 items</small>
+            <span>최근 본 상품</span>
+            <small id="recentNavCount">0개</small>
           </button>
         </aside>
 
@@ -88,21 +88,21 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">OVERVIEW</p>
-                <h2 id="home-title">Things to check today</h2>
+                <h2 id="home-title">오늘 확인할 것</h2>
               </div>
-              <button class="text-button" type="button" data-action="refresh">Reset</button>
+              <button class="text-button" type="button" data-action="refresh">초기화</button>
             </div>
 
             <div class="insight-grid">
               <article class="insight-card">
-                <span>Next action</span>
-                <strong id="nextActionTitle">Check shipment</strong>
-                <p id="nextActionCopy">Open order details to review item status.</p>
+                <span>다음 액션</span>
+                <strong id="nextActionTitle">배송 준비 상품 확인</strong>
+                <p id="nextActionCopy">주문 상세에서 상품별 상태를 확인할 수 있습니다.</p>
               </article>
               <article class="insight-card muted">
-                <span>AI recommendation hint</span>
-                <strong>Wishlist + recent products</strong>
-                <p>Mypage behavior data can improve recommendation quality later.</p>
+                <span>AI 추천 힌트</span>
+                <strong>찜 + 최근 본 상품 기반</strong>
+                <p>마이페이지 행동 데이터는 추천 품질 개선에 활용될 수 있습니다.</p>
               </article>
             </div>
 
@@ -110,40 +110,40 @@
               <button class="list-row" type="button" data-view="profile">
                 <span class="row-icon">ID</span>
                 <span class="row-text">
-                  <strong>Check profile</strong>
-                  <small>Manage contact info and default address</small>
+                  <strong>내 정보 확인</strong>
+                  <small>연락처와 기본 배송지를 관리합니다</small>
                 </span>
                 <span class="arrow">&gt;</span>
               </button>
               <button class="list-row" type="button" data-view="orders">
                 <span class="row-icon">OR</span>
                 <span class="row-text">
-                  <strong>View recent orders</strong>
-                  <small>Check order status and payment amount</small>
+                  <strong>최근 주문 보기</strong>
+                  <small>주문 상태와 결제 금액을 확인합니다</small>
                 </span>
                 <span class="arrow">&gt;</span>
               </button>
               <button class="list-row" type="button" data-view="payments">
                 <span class="row-icon">PAY</span>
                 <span class="row-text">
-                  <strong>View payment history</strong>
-                  <small>Check payment date, amount, method, and status</small>
+                  <strong>결제 내역 보기</strong>
+                  <small>결제일시, 금액, 수단, 상태를 확인합니다</small>
                 </span>
                 <span class="arrow">&gt;</span>
               </button>
               <button class="list-row" type="button" data-view="wishlist">
                 <span class="row-icon">LIKE</span>
                 <span class="row-text">
-                  <strong>Manage wishlist</strong>
-                  <small>Remove or restore liked products</small>
+                  <strong>찜한 상품 관리</strong>
+                  <small>관심 상품을 해제하거나 다시 복구합니다</small>
                 </span>
                 <span class="arrow">&gt;</span>
               </button>
               <button class="list-row" type="button" data-view="recent">
                 <span class="row-icon">VIEW</span>
                 <span class="row-text">
-                  <strong>Check recent products</strong>
-                  <small>Find products you viewed again</small>
+                  <strong>최근 본 상품 확인</strong>
+                  <small>다시 보고 싶은 상품을 빠르게 찾습니다</small>
                 </span>
                 <span class="arrow">&gt;</span>
               </button>
@@ -154,31 +154,31 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">ACCOUNT</p>
-                <h2 id="profile-title">Profile</h2>
+                <h2 id="profile-title">내 정보</h2>
               </div>
-              <button class="solid-button" type="button" data-action="edit-profile">Edit</button>
+              <button class="solid-button" type="button" data-action="edit-profile">수정</button>
             </div>
 
             <form class="form-card" id="profileForm">
               <label>
-                <span>Name</span>
+                <span>이름</span>
                 <input type="text" name="name" disabled>
               </label>
               <label>
-                <span>Email</span>
+                <span>이메일</span>
                 <input type="email" name="email" disabled>
               </label>
               <label>
-                <span>Phone</span>
+                <span>전화번호</span>
                 <input type="tel" name="phone" disabled>
               </label>
               <label>
-                <span>Default address</span>
+                <span>기본 배송지</span>
                 <input type="text" name="address" disabled>
               </label>
               <div class="form-actions hidden" id="profileActions">
-                <button class="outline-button" type="button" data-action="cancel-profile">Cancel</button>
-                <button class="solid-button" type="submit">Save</button>
+                <button class="outline-button" type="button" data-action="cancel-profile">취소</button>
+                <button class="solid-button" type="submit">저장</button>
               </div>
             </form>
           </section>
@@ -187,7 +187,7 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">ORDERS</p>
-                <h2 id="orders-title">Orders</h2>
+                <h2 id="orders-title">주문 내역</h2>
               </div>
               <span class="badge">Mock API</span>
             </div>
@@ -201,7 +201,7 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">PAYMENTS</p>
-                <h2 id="payments-title">Payments</h2>
+                <h2 id="payments-title">결제 내역</h2>
               </div>
               <span class="badge">Mock API</span>
             </div>
@@ -215,9 +215,9 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">WISHLIST</p>
-                <h2 id="wishlist-title">Wishlist</h2>
+                <h2 id="wishlist-title">찜한 상품</h2>
               </div>
-              <span class="badge">Remove/restore</span>
+              <span class="badge">해제/복구</span>
             </div>
             <div class="product-list" id="wishlistGrid"></div>
           </section>
@@ -226,9 +226,9 @@
             <div class="section-title">
               <div>
                 <p class="eyebrow">RECENTLY VIEWED</p>
-                <h2 id="recent-title">Recent products</h2>
+                <h2 id="recent-title">최근 본 상품</h2>
               </div>
-              <span class="badge">Recommendation input</span>
+              <span class="badge">추천 데이터 후보</span>
             </div>
             <div class="product-list" id="recentGrid"></div>
           </section>

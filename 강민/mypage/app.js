@@ -16,7 +16,7 @@ let state = {
   recent: []
 };
 
-const formatPrice = (value) => `${Number(value).toLocaleString("ko-KR")} KRW`;
+const formatPrice = (value) => `${Number(value).toLocaleString("ko-KR")}원`;
 
 async function request(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -28,7 +28,7 @@ async function request(path, options = {}) {
     ...options
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.message || "Request failed.");
+  if (!response.ok) throw new Error(payload.message || "요청 처리 중 오류가 발생했습니다.");
   return payload;
 }
 
@@ -68,20 +68,20 @@ function updateSummary() {
   const nextOrder = state.summary?.nextOrder;
 
   $("#avatarInitial").textContent = state.profile?.name?.trim().slice(0, 1) || "U";
-  $("#heroName").textContent = state.profile?.name || "User";
-  $("#heroEmail").textContent = state.profile?.email || "Login required";
+  $("#heroName").textContent = state.profile?.name || "사용자";
+  $("#heroEmail").textContent = state.profile?.email || "로그인이 필요합니다";
   $("#orderCount").textContent = orderCount;
   $("#paymentCount").textContent = paymentCount;
   $("#wishCount").textContent = activeWishCount;
   $("#recentCount").textContent = recentCount;
-  $("#orderNavCount").textContent = `${orderCount} orders`;
-  $("#paymentNavCount").textContent = `${paymentCount} items`;
-  $("#wishNavCount").textContent = `${activeWishCount} items`;
-  $("#recentNavCount").textContent = `${recentCount} items`;
-  $("#nextActionTitle").textContent = nextOrder ? `${nextOrder.status} order` : "No orders";
+  $("#orderNavCount").textContent = `${orderCount}건`;
+  $("#paymentNavCount").textContent = `${paymentCount}건`;
+  $("#wishNavCount").textContent = `${activeWishCount}개`;
+  $("#recentNavCount").textContent = `${recentCount}개`;
+  $("#nextActionTitle").textContent = nextOrder ? `${nextOrder.status} 주문 확인` : "주문 내역 없음";
   $("#nextActionCopy").textContent = nextOrder
-    ? `${nextOrder.orderId} has ${nextOrder.itemCount} item(s) to review.`
-    : "Order status appears here after checkout.";
+    ? `${nextOrder.orderId} 주문의 상품 ${nextOrder.itemCount}개를 확인할 수 있습니다.`
+    : "첫 주문을 완료하면 이 영역에서 상태를 확인할 수 있습니다.";
 }
 
 function renderProfile() {
@@ -109,8 +109,8 @@ function setProfileEditMode(enabled) {
 function renderOrders() {
   const list = $("#orderList");
   if (!state.orders.length) {
-    list.innerHTML = `<article class="empty-card">No orders yet.</article>`;
-    $("#orderDetail").innerHTML = `<p>Select an order to view details.</p>`;
+    list.innerHTML = `<article class="empty-card">주문 내역이 없습니다.</article>`;
+    $("#orderDetail").innerHTML = `<p>주문을 선택하면 상세 정보가 표시됩니다.</p>`;
     return;
   }
   list.innerHTML = state.orders.map((order) => `
@@ -124,7 +124,7 @@ function renderOrders() {
       </div>
       <div class="order-meta">
         <span>${order.orderedAt}</span>
-        <span>${order.itemCount} item(s)</span>
+        <span>${order.itemCount}개 상품</span>
         <span>${formatPrice(order.totalAmount)}</span>
       </div>
     </button>
@@ -135,7 +135,7 @@ function renderOrderDetail() {
   const detail = $("#orderDetail");
   const order = state.selectedOrder;
   if (!order) {
-    detail.innerHTML = `<p>Select an order to view details.</p>`;
+    detail.innerHTML = `<p>주문을 선택하면 상세 정보가 표시됩니다.</p>`;
     return;
   }
   detail.innerHTML = `
@@ -151,13 +151,13 @@ function renderOrderDetail() {
       `).join("")}
     </ul>
     <div class="detail-total">
-      <span>Total</span>
+      <span>총 결제금액</span>
       <strong>${formatPrice(order.totalAmount)}</strong>
     </div>
     <div class="detail-actions">
       ${(order.availableActions || []).map((action) => `
         <button class="${action === "cancel" ? "danger-button" : "text-button"}" type="button" data-order-action="${action}">
-          ${action === "pay" ? "Go to payment" : "Request cancel"}
+          ${action === "pay" ? "결제하기" : "취소 요청"}
         </button>
       `).join("")}
     </div>
@@ -167,8 +167,8 @@ function renderOrderDetail() {
 function renderPayments() {
   const list = $("#paymentList");
   if (!state.payments.length) {
-    list.innerHTML = `<article class="empty-card">No payment history.</article>`;
-    $("#paymentDetail").innerHTML = `<p>Select a payment to view details.</p>`;
+    list.innerHTML = `<article class="empty-card">결제 내역이 없습니다.</article>`;
+    $("#paymentDetail").innerHTML = `<p>결제를 선택하면 상세 정보가 표시됩니다.</p>`;
     return;
   }
   list.innerHTML = state.payments.map((payment) => `
@@ -193,21 +193,21 @@ function renderPaymentDetail() {
   const detail = $("#paymentDetail");
   const payment = state.selectedPayment;
   if (!payment) {
-    detail.innerHTML = `<p>Select a payment to view details.</p>`;
+    detail.innerHTML = `<p>결제를 선택하면 상세 정보가 표시됩니다.</p>`;
     return;
   }
   detail.innerHTML = `
     <p class="eyebrow">PAYMENT DETAIL</p>
     <h3>${payment.status}</h3>
     <ul>
-      <li><span>Payment ID</span><strong>${payment.paymentId}</strong></li>
-      <li><span>Order ID</span><strong>${payment.orderId}</strong></li>
-      <li><span>Method</span><strong>${payment.method}</strong></li>
-      <li><span>Paid at</span><strong>${payment.paidAt}</strong></li>
-      <li><span>Approval no</span><strong>${payment.approvalNo}</strong></li>
+      <li><span>결제 ID</span><strong>${payment.paymentId}</strong></li>
+      <li><span>주문번호</span><strong>${payment.orderId}</strong></li>
+      <li><span>결제수단</span><strong>${payment.method}</strong></li>
+      <li><span>결제일시</span><strong>${payment.paidAt}</strong></li>
+      <li><span>승인번호</span><strong>${payment.approvalNo}</strong></li>
     </ul>
     <div class="detail-total">
-      <span>Amount</span>
+      <span>결제금액</span>
       <strong>${formatPrice(payment.amount)}</strong>
     </div>
   `;
@@ -216,7 +216,7 @@ function renderPaymentDetail() {
 function productRow(item, options = {}) {
   const isWishlist = Boolean(options.wishlist);
   const disabled = isWishlist && !item.active;
-  const buttonText = isWishlist ? (item.active ? "Remove" : "Restore") : "View";
+  const buttonText = isWishlist ? (item.active ? "찜 해제" : "찜 복구") : "상품 보기";
   const buttonClass = isWishlist && item.active ? "danger-button" : "text-button";
   const metaText = item.viewedAt ? `${item.category} - ${item.viewedAt}` : item.category;
   return `
@@ -242,13 +242,13 @@ function productRow(item, options = {}) {
 function renderWishlist() {
   $("#wishlistGrid").innerHTML = state.wishlist.length
     ? state.wishlist.map((item) => productRow(item, { wishlist: true })).join("")
-    : `<article class="empty-card">No wishlist items.</article>`;
+    : `<article class="empty-card">찜한 상품이 없습니다.</article>`;
 }
 
 function renderRecent() {
   $("#recentGrid").innerHTML = state.recent.length
     ? state.recent.map((item) => productRow(item)).join("")
-    : `<article class="empty-card">No recently viewed products.</article>`;
+    : `<article class="empty-card">최근 본 상품이 없습니다.</article>`;
 }
 
 function renderAll() {
@@ -263,29 +263,38 @@ function renderAll() {
 }
 
 async function loadInitialData() {
-  setStatus("Loading mock API data...");
+  setStatus("목업 API 데이터를 불러오는 중입니다.");
   try {
-    const [summary, profile, orders, payments, wishlist, recent] = await Promise.all([
+    const [summary, profile, orders, wishlist, recent] = await Promise.all([
       mypageApi.getSummary(),
       mypageApi.getProfile(),
       mypageApi.getOrders(),
-      mypageApi.getPayments(),
       mypageApi.getWishlist(),
       mypageApi.getRecentProducts()
     ]);
+
     state.summary = summary;
     state.profile = profile;
     state.orders = orders;
-    state.payments = payments;
     state.wishlist = wishlist;
     state.recent = recent;
     state.selectedOrderId = orders[0]?.orderId ?? null;
     state.selectedOrder = state.selectedOrderId ? await mypageApi.getOrderDetail(state.selectedOrderId) : null;
-    state.selectedPaymentId = payments[0]?.paymentId ?? null;
-    state.selectedPayment = state.selectedPaymentId ? await mypageApi.getPaymentDetail(state.selectedPaymentId) : null;
+
+    try {
+      state.payments = await mypageApi.getPayments();
+      state.selectedPaymentId = state.payments[0]?.paymentId ?? null;
+      state.selectedPayment = state.selectedPaymentId ? await mypageApi.getPaymentDetail(state.selectedPaymentId) : null;
+    } catch (error) {
+      state.payments = [];
+      state.selectedPaymentId = null;
+      state.selectedPayment = null;
+      setStatus("결제 API가 없는 이전 목업 서버입니다. 서버를 재시작하면 결제 내역이 표시됩니다.", true);
+    }
+
     renderAll();
     setView(state.activeView);
-    setStatus("");
+    if (state.payments.length) setStatus("");
   } catch (error) {
     setStatus(error.message, true);
   }
@@ -318,7 +327,7 @@ document.addEventListener("click", async (event) => {
       state.wishlist = wishlist;
       updateSummary();
       renderWishlist();
-      setStatus("Wishlist updated.");
+      setStatus("찜 상태가 변경되었습니다.");
       setTimeout(() => setStatus(""), 1600);
     } catch (error) {
       setStatus(error.message, true);
@@ -340,8 +349,8 @@ document.addEventListener("click", async (event) => {
   const orderAction = event.target.closest("[data-order-action]");
   if (orderAction) {
     const actionText = orderAction.dataset.orderAction === "pay"
-      ? "Payment flow will be handled by the payment domain."
-      : "Cancel flow will be handled by the order/payment domain.";
+      ? "결제 처리는 결제 도메인에서 담당합니다."
+      : "주문/결제 취소 처리는 주문·결제 도메인에서 담당합니다.";
     setStatus(actionText);
     setTimeout(() => setStatus(""), 2200);
     return;
@@ -385,7 +394,7 @@ $("#profileForm").addEventListener("submit", async (event) => {
     state.summary = await mypageApi.getSummary();
     setProfileEditMode(false);
     renderAll();
-    setStatus("Profile updated.");
+    setStatus("내 정보가 수정되었습니다.");
     setTimeout(() => setStatus(""), 1600);
   } catch (error) {
     setStatus(error.message, true);
