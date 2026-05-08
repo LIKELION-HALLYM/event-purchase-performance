@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mypage Mock</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <nav class="top-nav" aria-label="service navigation">
+          <a href="#" aria-label="go home">SHOP</a>
+          <div class="top-nav-actions">
+            <button class="ghost-icon" type="button" aria-label="search">S</button>
+            <button class="ghost-icon" type="button" aria-label="cart">C</button>
+          </div>
+        </nav>
+
+        <section class="hero-card" aria-labelledby="mypage-title">
+          <div class="profile-block">
+            <div class="avatar" id="avatarInitial">K</div>
+            <div>
+              <p class="eyebrow">MY PAGE</p>
+              <h1 id="mypage-title"><span id="heroName">Kang Min</span>'s shopping status</h1>
+              <p class="hero-copy" id="heroEmail">kkm@example.com</p>
+            </div>
+          </div>
+          <button class="solid-button" type="button" data-action="edit-profile">Edit profile</button>
+        </section>
+      </header>
+
+      <p class="status-message hidden" id="statusMessage" role="status"></p>
+
+      <section class="stats" aria-label="mypage summary">
+        <article class="stat-card" data-view="orders" tabindex="0" role="button">
+          <span>Orders</span>
+          <strong id="orderCount">0</strong>
+          <p>Last 3 months</p>
+        </article>
+        <article class="stat-card" data-view="payments" tabindex="0" role="button">
+          <span>Payments</span>
+          <strong id="paymentCount">0</strong>
+          <p>Payment history</p>
+        </article>
+        <article class="stat-card" data-view="wishlist" tabindex="0" role="button">
+          <span>Wishlist</span>
+          <strong id="wishCount">0</strong>
+          <p>Active items</p>
+        </article>
+        <article class="stat-card" data-view="recent" tabindex="0" role="button">
+          <span>Recent</span>
+          <strong id="recentCount">0</strong>
+          <p>Recommendation data</p>
+        </article>
+      </section>
+
+      <div class="workbench">
+        <aside class="rail" aria-label="mypage tabs">
+          <button class="rail-item active" type="button" data-view="home">
+            <span>Home</span>
+            <small>Summary</small>
+          </button>
+          <button class="rail-item" type="button" data-view="profile">
+            <span>Profile</span>
+            <small>Edit</small>
+          </button>
+          <button class="rail-item" type="button" data-view="orders">
+            <span>Orders</span>
+            <small id="orderNavCount">0 orders</small>
+          </button>
+          <button class="rail-item" type="button" data-view="payments">
+            <span>Payments</span>
+            <small id="paymentNavCount">0 items</small>
+          </button>
+          <button class="rail-item" type="button" data-view="wishlist">
+            <span>Wishlist</span>
+            <small id="wishNavCount">0 items</small>
+          </button>
+          <button class="rail-item" type="button" data-view="recent">
+            <span>Recent</span>
+            <small id="recentNavCount">0 items</small>
+          </button>
+        </aside>
+
+        <section class="surface">
+          <section class="view active" id="homeView" aria-labelledby="home-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h2 id="home-title">Things to check today</h2>
+              </div>
+              <button class="text-button" type="button" data-action="refresh">Reset</button>
+            </div>
+
+            <div class="insight-grid">
+              <article class="insight-card">
+                <span>Next action</span>
+                <strong id="nextActionTitle">Check shipment</strong>
+                <p id="nextActionCopy">Open order details to review item status.</p>
+              </article>
+              <article class="insight-card muted">
+                <span>AI recommendation hint</span>
+                <strong>Wishlist + recent products</strong>
+                <p>Mypage behavior data can improve recommendation quality later.</p>
+              </article>
+            </div>
+
+            <div class="list-card">
+              <button class="list-row" type="button" data-view="profile">
+                <span class="row-icon">ID</span>
+                <span class="row-text">
+                  <strong>Check profile</strong>
+                  <small>Manage contact info and default address</small>
+                </span>
+                <span class="arrow">&gt;</span>
+              </button>
+              <button class="list-row" type="button" data-view="orders">
+                <span class="row-icon">OR</span>
+                <span class="row-text">
+                  <strong>View recent orders</strong>
+                  <small>Check order status and payment amount</small>
+                </span>
+                <span class="arrow">&gt;</span>
+              </button>
+              <button class="list-row" type="button" data-view="payments">
+                <span class="row-icon">PAY</span>
+                <span class="row-text">
+                  <strong>View payment history</strong>
+                  <small>Check payment date, amount, method, and status</small>
+                </span>
+                <span class="arrow">&gt;</span>
+              </button>
+              <button class="list-row" type="button" data-view="wishlist">
+                <span class="row-icon">LIKE</span>
+                <span class="row-text">
+                  <strong>Manage wishlist</strong>
+                  <small>Remove or restore liked products</small>
+                </span>
+                <span class="arrow">&gt;</span>
+              </button>
+              <button class="list-row" type="button" data-view="recent">
+                <span class="row-icon">VIEW</span>
+                <span class="row-text">
+                  <strong>Check recent products</strong>
+                  <small>Find products you viewed again</small>
+                </span>
+                <span class="arrow">&gt;</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="view" id="profileView" aria-labelledby="profile-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">ACCOUNT</p>
+                <h2 id="profile-title">Profile</h2>
+              </div>
+              <button class="solid-button" type="button" data-action="edit-profile">Edit</button>
+            </div>
+
+            <form class="form-card" id="profileForm">
+              <label>
+                <span>Name</span>
+                <input type="text" name="name" disabled>
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" name="email" disabled>
+              </label>
+              <label>
+                <span>Phone</span>
+                <input type="tel" name="phone" disabled>
+              </label>
+              <label>
+                <span>Default address</span>
+                <input type="text" name="address" disabled>
+              </label>
+              <div class="form-actions hidden" id="profileActions">
+                <button class="outline-button" type="button" data-action="cancel-profile">Cancel</button>
+                <button class="solid-button" type="submit">Save</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="view" id="ordersView" aria-labelledby="orders-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">ORDERS</p>
+                <h2 id="orders-title">Orders</h2>
+              </div>
+              <span class="badge">Mock API</span>
+            </div>
+            <div class="order-layout">
+              <div class="order-list" id="orderList"></div>
+              <article class="order-detail" id="orderDetail" aria-live="polite"></article>
+            </div>
+          </section>
+
+          <section class="view" id="paymentsView" aria-labelledby="payments-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">PAYMENTS</p>
+                <h2 id="payments-title">Payments</h2>
+              </div>
+              <span class="badge">Mock API</span>
+            </div>
+            <div class="order-layout">
+              <div class="order-list" id="paymentList"></div>
+              <article class="order-detail" id="paymentDetail" aria-live="polite"></article>
+            </div>
+          </section>
+
+          <section class="view" id="wishlistView" aria-labelledby="wishlist-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">WISHLIST</p>
+                <h2 id="wishlist-title">Wishlist</h2>
+              </div>
+              <span class="badge">Remove/restore</span>
+            </div>
+            <div class="product-list" id="wishlistGrid"></div>
+          </section>
+
+          <section class="view" id="recentView" aria-labelledby="recent-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">RECENTLY VIEWED</p>
+                <h2 id="recent-title">Recent products</h2>
+              </div>
+              <span class="badge">Recommendation input</span>
+            </div>
+            <div class="product-list" id="recentGrid"></div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
