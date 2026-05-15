@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - mypage
+      - Crawling
+      - "강민"
+  push:
+    branches:
+      - main
+      - mypage
+      - Crawling
+      - "강민"
+  workflow_dispatch:
+
+jobs:
+  mypage-check:
+    name: Mypage frontend and mock API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check required mypage files
+        shell: bash
+        run: |
+          test -f "강민/mypage/index.html"
+          test -f "강민/mypage/styles.css"
+          test -f "강민/mypage/app.js"
+          test -f "mypage_mock_server.js"
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check "강민/mypage/app.js"
+          node --check "mypage_mock_server.js"
+
+      - name: Run mock API smoke test
+        shell: bash
+        run: |
+          PORT=5177 node mypage_mock_server.js &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID" EXIT
+          sleep 2
+          curl -fsS "http://127.0.0.1:5177/" > /tmp/mypage.html
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/summary" | grep -q "orderCount"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/orders" | grep -q "orderId"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/wishlist" | grep -q "productId"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/payments" | grep -q "paymentId"
+
+  data-script-check:
+    name: Crawling and DB scripts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile Python scripts
+        shell: bash
+        run: |
+          mapfile -t python_files < <(find . -path "*/__pycache__/*" -prune -o -name "*.py" -print)
+          if [ "${#python_files[@]}" -eq 0 ]; then
+            echo "No Python files found. Skipping py_compile."
+            exit 0
+          fi
+          python -m py_compile "${python_files[@]}"
+
+      - name: Check PowerShell benchmark script syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("강민/db/benchmark_postgres_mysql.ps1", [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors) {
+            $errors | Format-List *
+            exit 1
+          }
+          "PowerShell syntax OK"
+
+      - name: Validate CSV schema when datasets exist
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          required = [
+              "product_name",
+              "brand",
+              "category",
+              "price",
+              "discount_rate",
+              "rating",
+              "review_count",
+              "image_url",
+              "source",
+              "source_url",
+          ]
+          optional = ["sub_category"]
+          paths = [
+              Path("강민/data/processed/musinsa_products_clean.csv"),
+              Path("강민/data/processed/29cm_products_clean.csv"),
+              Path("강민/data/raw/fashion_products_final.csv"),
+          ]
+          for path in paths:
+              if not path.exists():
+                  print(f"skip missing dataset: {path}")
+                  continue
+              with path.open("r", encoding="utf-8-sig", newline="") as file:
+                  reader = csv.DictReader(file)
+                  header = reader.fieldnames or []
+              missing = [column for column in required if column not in header]
+              if missing:
+                  raise SystemExit(f"{path} missing required columns: {missing}")
+              print(f"schema ok: {path}")
+          PY
+
+  docs-check:
+    name: Required documents
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check planning documents
+        shell: bash
+        run: |
+          test -f "강민/mypage/feature_spec_review.md"
+          test -f "강민/mypage/erd_draft.md"
+          test -f "강민/mypage/architecture_v1_draft.md"
+          test -f "강민/mypage/task_and_cicd_draft.md"
+          test -f "강민/db/postgres_mysql_benchmark_README.md"

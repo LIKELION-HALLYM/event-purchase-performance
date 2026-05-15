@@ -1,0 +1,7 @@
+﻿"dbms","query_name","iterations","avg_ms","p95_ms","min_ms","max_ms"
+"mysql","brand_exact","1000","0.0753","0.13","0.043","0.232"
+"mysql","category_exact","1000","0.2392","0.66","0.049","1.072"
+"mysql","name_keyword_contains","1000","9.4747","12.59","0.09","19.008"
+"mysql","price_order_page","1000","1.6345","2.998","0.083","4.721"
+"mysql","price_range","1000","0.8275","1.965","0.04","2.734"
+"mysql","source_exact","1000","1.1482","1.509","0.075","2.081"
