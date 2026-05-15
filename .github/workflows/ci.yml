@@ -51,8 +51,9 @@ jobs:
           sleep 2
           curl -fsS "http://127.0.0.1:5177/" > /tmp/mypage.html
           curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/summary" | grep -q "orderCount"
-          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/orders" | grep -q "orders"
-          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/wishlist" | grep -q "wishlist"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/orders" | grep -q "orderId"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/wishlist" | grep -q "productId"
+          curl -fsS -H "X-Mock-User: 1" "http://127.0.0.1:5177/api/mypage/payments" | grep -q "paymentId"
 
   data-script-check:
     name: Crawling and DB scripts
