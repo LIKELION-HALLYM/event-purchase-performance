@@ -95,3 +95,22 @@ jobs:
 - 마이페이지 Payments 탭 추가 완료
 - 주문 상세의 결제/취소 액션 진입점 추가 완료
 - CI 체크 대상에 `mypage_mock_server.js` 문법 검사를 포함해야 함
+
+## 2026-05-15 CI/CD 적용 결과
+
+- `.github/workflows/ci.yml` 추가 완료
+  - PR 및 push 기준 CI 실행
+  - 마이페이지 필수 파일 존재 확인
+  - `강민/mypage/app.js`, `mypage_mock_server.js` JavaScript 문법 검사
+  - 목업 API smoke test 실행
+  - 크롤링/정제/DB Python 스크립트 문법 검사
+  - 데이터 CSV 공통 스키마 컬럼 검증
+  - 기능명세서/ERD/아키텍처/Task 문서 존재 확인
+- `.github/workflows/deploy-mypage.yml` 추가 완료
+  - `main` 브랜치 마이페이지 변경 시 GitHub Pages 정적 프리뷰 배포
+  - 수동 실행 지원
+- `강민/mypage/cicd_status.md` 추가 완료
+  - CI/CD 적용 상태와 팀 확인 필요 사항 정리
+
+현재 상태는 CI/CD 설계 초안에서 실제 GitHub Actions workflow 추가 단계까지 진행된 상태다.
+단, GitHub Pages 배포는 GitHub 저장소 설정에서 Pages 사용이 켜져 있어야 실제 URL이 생성된다.
